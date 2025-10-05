@@ -28,16 +28,17 @@ jobs:
           tenant-id: ${{ secrets.GLADOS_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.GLADOS_AZURE_SUBSCRIPTION_ID }}
 
-      - name: Build and push container image to Azure Container Registry
+      - name: Build, Push, and Deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}
           acrName: edsalterai
-          #registryUrl: edsalterai.azurecr.io
+          registryUrl: edsalterai.azurecr.io
           registryUsername: ${{ secrets.GLADOS_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.GLADOS_REGISTRY_PASSWORD }}
           containerAppName: glados
           resourceGroup: ai2
           imageToBuild: edsalterai.azurecr.io/glados:${{ github.sha }}
           dockerfilePath: ./Dockerfile
-
+          targetPort: 5050
+          ingress: external
