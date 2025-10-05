@@ -33,7 +33,7 @@ jobs:
         with:
           appSourcePath: ${{ github.workspace }}
           acrName: edsalterai
-          registryUrl: edsalterai.azurecr.io
+          #registryUrl: edsalterai.azurecr.io
           registryUsername: ${{ secrets.GLADOS_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.GLADOS_REGISTRY_PASSWORD }}
           containerAppName: glados
@@ -42,3 +42,4 @@ jobs:
           dockerfilePath: ./Dockerfile
           targetPort: 5050
           ingress: external
+
